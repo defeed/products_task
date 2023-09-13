@@ -11,3 +11,6 @@ foo.reviews.create(content: "Not what I expected", rating: 1)
 
 bar.reviews.create(content: "Amazing value for the price.", rating: 4)
 bar.reviews.create(content: "Best thing ever", rating: 5)
+
+
+FeatureFlag.create(name: "standalone_reviews", value: true)
