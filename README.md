@@ -1,8 +1,8 @@
 # README
 
-Ruby version used: v3.1.0
-Rails version used: v7.0.8
-SQLite is used as database
+* Ruby version used: v3.1.0
+* Rails version used: v7.0.8
+* SQLite is used as database
 
 ## Setup
 
