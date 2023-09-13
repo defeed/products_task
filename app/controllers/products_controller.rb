@@ -1,11 +1,15 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.select(:id, :name, :price)
-    render json: @products
+    products = Product.select(:id, :name, :price)
+    render json: products
   end
 
   def show
-    @product = Product.select(:id, :name, :price).find(params[:id])
-    render json: ProductsService.new(@product).product_data
+    product = Product.find_by(id: params[:id])
+    unless product
+      render json: { error: "Product not found" }, status: :not_found and return
+    end
+
+    render json: ProductsService.new(product).product_data
   end
 end

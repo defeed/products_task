@@ -46,4 +46,13 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
       assert_includes review, 'updated_at'
     end
   end
+
+  test 'should respond with 404 when product does not exist' do
+    non_existent_product_id = 9990
+    get product_url(non_existent_product_id)
+    assert_response :not_found
+
+    json_response = JSON.parse(response.body)
+    assert_equal({ 'error' => 'Product not found' }, json_response)
+  end
 end
