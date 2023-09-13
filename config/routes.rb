@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  resources :products, only: [:index, :show] do
+    resources :reviews, only: [:index], on: :member
+  end
 
   # Defines the root path route ("/")
   root "products#index"
-
-  resources :products, only: [:index, :show]
 end
