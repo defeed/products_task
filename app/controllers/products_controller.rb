@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
-    render json: @product.to_json(include: :reviews)
+    @product = Product.select(:id, :name, :price).find(params[:id])
+    render json: ProductsService.new(@product).product_data
   end
 end
