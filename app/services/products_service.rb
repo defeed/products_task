@@ -1,16 +1,19 @@
 class ProductsService
-  include Rails.application.routes.url_helpers
-
   def initialize(product)
     @product = product
   end
 
   def product_data
-    # Define the default behavior in case feature flag is removed or name is changed in future
+    ProductRenderer.new(@product, renderer: find_renderer).call
+  end
+
+  private
+
+  def find_renderer
     if FeatureFlagsService.is_enabled?('standalone_reviews', true)
-      @product.attributes.merge({ reviews_path: product_reviews_path(@product) }).as_json
+      StandaloneReviewsProductRenderer
     else
-      @product.as_json(include: :reviews)
+      EmbeddedReviewsProductRenderer
     end
   end
 end
