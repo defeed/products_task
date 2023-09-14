@@ -34,12 +34,12 @@ namespace :feature_flags do
 
     feature_flag = FeatureFlag.find_by(name: name)
 
-    if feature_flag && value
+    if feature_flag && (value == true || value == false)
       feature_flag.update!(value: value)
       puts "Set feature flag '#{name}' to '#{feature_flag.value}'."
     elsif !feature_flag
       puts "Feature flag '#{name}' not found."
-    elsif !value
+    else
       puts "Feature flag value is not given"
     end
   end
